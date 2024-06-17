@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <title>
+        {% block title %}Management System{% endblock title %}
+    </title>
+    <!--<link rel="stylesheet" href="{% static "Users/base_style.css"  %}">-->
+    <link rel="stylesheet" href="../../static/Users/base_style.css">
+    <link rel="stylesheet" type="text/css" href="../../static/Users/dashboard.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"> -->
+</head>
+<body>
+    <header>
+		<div>
+            <h1>WELCOME LEARNER &#9997;</h1>
+        </div>
+	</header>
+    <nav>
+        <div class="nav_ul">
+            <ul>
+                <li><a href="#" class="fa fa-home">  Home</a></li>
+                <li><a href="#" class="fa fa-folder-open">  Projects & Portfolio</a></li>
+                <li><a href="#" class="fa fa-file">  To Do List</a></li>
+                <li><a href="#" class="fa fa-heart">  About</a></li>
+                <li><a href="#" class="fa fa-phone">  Contacts</a></li>
+                <div class="nav-logs">
+                    <li>
+                        <div id="profile">
+                            <a href="#" class="fa fa-edit">  Profile</a>
+                        </div>
+                        <div class="log-links">
+                            <a href="#" class="fa fa-key">  Login</a>
+                            <a href="#" class="fa fa-lock">  Logout</a>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </nav>
+    <section class="container">
+        <div class="content">
+            {% block content %}
+            {% endblock content %}
+        </div>
+        <div class="content">
+            {% block profile %}
+            {% endblock profile %}
+        </div>
+    </section>
+    <section class="container fot-content position">
+        <div class="fot_container">
+            <footer>
+                <div class="fot-content">
+                    <div class="fot_div">
+                        <div class="fot_social">
+                            <div class="fot-handles">
+                                <h1>SOCIAL MEDIA HANDLES</h1>
+                                <p>follow and share</p>
+                            </div>
+                            <div class="fot_ul">
+                                <ul>
+                                    <li><a href="#" class="fa fa-linkedin">  LINKEDIN</a></li>
+                                    <li><a href="#" class="fa fa-github">  GITHUB</a></li>
+                                    <li><a href="#" class="fa fa-instagram">  INSTAGRAM</a></li>
+                                    <li><a href="#" class="fa fa-youtube">  YOUTUBE</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="fot_cont_info">
+                            <div class="fot-contact">
+                                <h1>CONTACTS & PORTFOLIO</h1>
+                                <p>Feel free to check them out and get in touch</p>
+                            </div>
+                            <div class="fot-bio">
+                                <p>Other Sites & Portfolio</p>
+                                <p><a href="mailto:austinengonga@yahoo.com" class="fa fa-envelope-open">  email me </a></p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fot_copy">
+                        <div class="copy-content">
+                            <div class="fot-tm">
+                                <p>MONIQUECODES &#8482</p>
+                            </div>
+                            <div class="fot-rt">
+                                <p>&#169 CopyRight 2024</p>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+            </footer>
+        </div>
+    </section>
+
+</body>
+</html>

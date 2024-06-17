@@ -1,0 +1,26 @@
+{% extends "index.html" %}
+{%  block login %}
+    <form action="{% url 'login_' %}" method="POST">
+    {% csrf_token %}
+        <div class="field-pos">
+            <fieldset>
+                <div class="form-h">
+                    <legend> Login</legend>
+                </div>
+                <div id="" class="form-fields">
+                    <label for="mailUsername">Email/Username</label>
+                    <input type="text" id="mainlUsername" name="username" required><br>
+                    <label for="pwd">Password</label>
+                    <input type="password" id="pwd" name="pwd" required><br><br>
+                    <input type="submit" value="Submit">
+                </div>
+                {% if messages %}
+                    {% for message in messages%}
+                        <p>{{meassgae}}</p>
+                    {% endfor %}
+                {% endif %}
+                <p class="account-text">Don't have an account? <a href="{% url 'register_'%}" id="sign-up-btn2">Register</a></p>
+            </fieldset>
+        </div>
+    </form>
+{% endblock login %}

@@ -1,0 +1,11 @@
+{% extends "base.html"}
+
+<section>
+	<div>
+		<h1>COURSE(S) REGISTERED</h1>
+	</div>
+	<ul>
+		{% for course in courses %}
+			<li>{course.id} <span>{course.score}</span></li>
+	</ul>
+</section>

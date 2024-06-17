@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block profile %}
+<div>
+	<div>
+		<h1>Your Profile Details</h1>
+		{% if user.username or user.location %}
+			{%if user.usrname%}
+				<p>{{ user.username}}</p>
+			{% endif %}
+			{% if user.location %}
+				<p>From <a href="http://maps.google.com/?q={{user.location}}">{{user.location}}</a></p>
+			{% endif %}
+		{% endif  %}
+		{% if user.about %}
+			<p>{{user.about}}</p>
+		{% endif  %}
+	</div>
+</div>
+<div>
+	<ul>
+		{% for course in coures %}
+		<li>{{course.name}} {{course.score}}</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endblock profile %}

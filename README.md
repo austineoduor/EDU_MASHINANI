@@ -1,2 +1,1 @@
-# EDU_MASHINANI
-EDUCATION FOR ALL
+Management system for my wep site users

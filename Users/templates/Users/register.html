@@ -1,0 +1,33 @@
+{%extends "index.html"%}
+{% block reg %}
+    <form action="{% url 'register_' %}" method="POST">
+    {% csrf_token %}
+        <div class="field-pos">
+            <fieldset>
+                <div class="form-h">
+                    <legend>Registration Details</legend>
+                </div>
+                <!--user details-->
+                <div id="" class="form-reg-fields">
+                    <div class="user_">
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" name="fname" required><br>
+                        <label for="mname">Middle Name (optional)</label>
+                        <input type="text" id="mname" name="mname"><br>
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" name="lname" required><br>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required><br>
+                        <label for="pwd">password</label>
+                        <input type="password" id="password" name="pwd" minlength="8" required><br>
+                        <label for="c_pwd">Confirm password</label>
+                        <input type="password" id="c_pwd" name="c_pwd" minlength="8" required><br><br>
+                        <input class="submit" type="submit" value="Submit"><br>
+                        <p class="account-text">Already have an account? <a href="{% url 'login_'%}" id="sign-in-btn2">Login</a></p>
+                    </div> 
+                    
+                </div>
+            </fieldset>
+        </div>
+    </form>
+{% endblock reg %}

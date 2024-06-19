@@ -50,12 +50,15 @@ nav {
 h1 {
 	color: #202124;
 }
+a {
+	text-decoration: none;
+}
 ul li a {
 	text-decoration: none;
 }
 
 .nav_ul ul { 
-	display: inline-block;
+	display: flex;
 	list-style-type: none;
 	background-color: #da9b7c;
 	margin: 0;
@@ -200,10 +203,25 @@ form {
     transition: 0.5s ease-in-out;
     transition-delay: 1s;
 }
+.form-login fieldset {
+    display: block;
+    border-color: rgb(61, 43, 19);
+    border-style: dotted;
+    border-radius: 20px;
+    height: 500px;
+    margin-left: -200px;
+}
 .form-register {
     opacity: 0;
     transition: 0.5s ease-in-out;
     transition-delay: 1s;
+}fieldset {
+    display: block;
+    border-color: rgb(61, 43, 19);
+    border-style: dotted;
+    border-radius: 20px;
+    height: 500px;
+    margin-right: -170px;
 }
 
 .panels-container {
@@ -286,9 +304,18 @@ form {
     transform: translateX(0);
 } 
 
+.err {
 
+	background-color: #b7c1ac;
+	border-radius: 5px;
+}
 
-
+.err > p {
+	margin-top: -30px;
+	text-align: center;
+	font-size: 18px;
+	color: #9a2929;
+}
 
 .account-text {
     margin-top: -20px;
@@ -339,12 +366,13 @@ form {
 }
 
 
-@media (max-width:635px) {
+@media (max-width:735px) {
     .form_container::before {
         display: none;
     }
     form {
         width: 80%;
+        margin-left: -200px;
     }
     form.form-register {
         display: none;
@@ -365,6 +393,7 @@ form {
 @media (max-width:320px) {
     form {
         width: 90%;
+        margin-left: -180px;
     }
 }
 
@@ -420,13 +449,7 @@ fieldset > p {
     margin: auto;
 }
 
-fieldset {
-    display: block;
-    border-color: rgb(61, 43, 19);
-    border-style: dotted;
-    border-radius: 20px;
-    height: 500px;
-}
+
 legend {
     height: 10px;
     font-size: 20px;

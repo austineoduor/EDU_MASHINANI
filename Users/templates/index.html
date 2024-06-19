@@ -5,8 +5,8 @@
         <title>
             {% block title %}Index{% endblock title %}
         </title>
-        <!--<link rel="stylesheet" href="{% static "Users/base_style.css"  %}">-->
-        <link rel="stylesheet" href="../../static/Users/base_style.css">
+        <link rel="stylesheet" href="{% static 'Users/base_style.css'  %}">
+        <!--<link rel="stylesheet" href="../../static/Users/base_style.css">-->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -37,7 +37,7 @@
                             <div class="content">
                                 <h3>Already a Member</h3>
                                 <p>Login to continue</p>
-                                <button class="btn" id="sign-in-btn">Login</button>
+                                <button class="btn" id="sign-in-btn"><a href="{% url 'login_'%}">Login</a></button>
                             </div>
                             <img src="../../static/images/signin.svg" alt="" class="image">
                         </div>
@@ -45,14 +45,8 @@
                             <div class="content">
                                 <h3> New To The Platform ?</h3>
                                 <p>Please register to enjoy</p>
-                                <button class="btn" id="sign-up-btn">Register</button>
-                                <div>
-                                    {% if messages %}
-                                        {% for message in messages %}
-                                            <p>{{message}}</p>
-                                        {% endfor %}
-                                    {% endif %}
-                                </div>
+                                <button class="btn" id="sign-up-btn"><a href="{% url 'register_'%}">Register</a></button>
+                                
                             </div>
                             <img src="../../static/images/signup.svg" alt="" class="image">
                         </div>

@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1","10.0.2.15"]
 
+#user model
+AUTH_USER_MODEL = 'Users.User'
 
 # Application definition
 
@@ -117,6 +119,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+#custom login url
+LOGIN_URL = '/en/login'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

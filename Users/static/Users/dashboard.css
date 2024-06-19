@@ -11,11 +11,11 @@ header > h1 {
     border-radius: 5PX;
     box-shadow: 10px 10px 3px lightblue;
 }
-h1 {
+.container h1 {
     color: #4035a7;
     text-align: center;
 }
-h3,h2 {
+.container h3 h2 {
     color: #e0ff17;
     text-align: center;
 }

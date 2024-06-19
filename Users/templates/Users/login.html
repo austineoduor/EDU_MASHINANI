@@ -8,17 +8,21 @@
                     <legend> Login</legend>
                 </div>
                 <div id="" class="form-fields">
+                    {% if messages %}
+                        <div class="err">
+                            {% for message in messages %}
+                                <p>{{message}}</p>
+                            {% endfor %}
+                            
+                        </div>
+                    {% endif %}
                     <label for="mailUsername">Email/Username</label>
                     <input type="text" id="mainlUsername" name="username" required><br>
+                    <input type="hidden" name="next" value="{{request.GET.next}}">
                     <label for="pwd">Password</label>
                     <input type="password" id="pwd" name="pwd" required><br><br>
                     <input type="submit" value="Submit">
                 </div>
-                {% if messages %}
-                    {% for message in messages%}
-                        <p>{{meassgae}}</p>
-                    {% endfor %}
-                {% endif %}
                 <p class="account-text">Don't have an account? <a href="{% url 'register_'%}" id="sign-up-btn2">Register</a></p>
             </fieldset>
         </div>

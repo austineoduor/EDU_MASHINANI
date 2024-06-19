@@ -5,13 +5,13 @@
     <title>
         {% block title %}Management System{% endblock title %}
     </title>
-    <!--<link rel="stylesheet" href="{% static "Users/base_style.css"  %}">-->
-    <link rel="stylesheet" href="../../static/Users/base_style.css">
-    <link rel="stylesheet" type="text/css" href="../../static/Users/dashboard.css">
+    <link rel="stylesheet" href="{% static 'Users/base_style.css'  %}">
+    <link rel="stylesheet" href="{% static 'Users/dashboard.css'  %}">
+    <!--<link rel="stylesheet" href="../../static/Users/base_style.css">-->
+    <!-- <link rel="stylesheet" type="text/css" href="../../static/Users/dashboard.css">-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!--<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"> -->
 </head>
 <body>
     <header>
@@ -26,15 +26,15 @@
                 <li><a href="#" class="fa fa-folder-open">  Projects & Portfolio</a></li>
                 <li><a href="#" class="fa fa-file">  To Do List</a></li>
                 <li><a href="#" class="fa fa-heart">  About</a></li>
-                <li><a href="#" class="fa fa-phone">  Contacts</a></li>
+                <li><a href="#fot" class="fa fa-phone">  Contacts</a></li>
                 <div class="nav-logs">
                     <li>
                         <div id="profile">
-                            <a href="#" class="fa fa-edit">  Profile</a>
+                            <a href="{% url 'profile' 3 %}" class="fa fa-edit">  Profile</a>
                         </div>
                         <div class="log-links">
-                            <a href="#" class="fa fa-key">  Login</a>
-                            <a href="#" class="fa fa-lock">  Logout</a>
+                            <!-- <a href="#" class="fa fa-key">  Login</a> -->
+                            <a href="{% url 'logout_' %}" class="fa fa-lock">  Logout</a>
                         </div>
                     </li>
                 </div>
@@ -51,7 +51,7 @@
             {% endblock profile %}
         </div>
     </section>
-    <section class="container fot-content position">
+    <section id="fot" class="container fot-content position">
         <div class="fot_container">
             <footer>
                 <div class="fot-content">

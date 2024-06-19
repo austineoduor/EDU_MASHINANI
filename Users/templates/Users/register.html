@@ -9,6 +9,13 @@
                 </div>
                 <!--user details-->
                 <div id="" class="form-reg-fields">
+                    {% if messages %}
+                        <div class="err">
+                            {% for message in messages %}
+                                <p>{{message}}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                     <div class="user_">
                         <label for="fname">First Name</label>
                         <input type="text" id="fname" name="fname" required><br>

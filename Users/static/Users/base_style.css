@@ -292,6 +292,9 @@ form {
 .btn:hover {
     background: #a00d87;
 }
+.btn a{
+	color: white;
+}
 
 
 .left-panel .image,
@@ -299,7 +302,7 @@ form {
     transform: translateX(-230%);
 }
 
- .right-panel .image,
+ .right-panel .image, .right-panel.btn > a,
 .right-panel .content {
     transform: translateX(0);
 } 

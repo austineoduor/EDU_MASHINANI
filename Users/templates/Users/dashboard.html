@@ -1,246 +1,62 @@
 {% extends "base.html" %}
-<link rel="stylesheet" type="text/css" href="../../static/Users/dashboard.css">
+{% load static %}
+{% load helper_extras %}
+
 {% block content %}
+{% block title %} Dashboard {% endblock %}
+<div class="dashboard-container">
 
-	<div class="container">
-		<div>
-		<header>
-			<h1>REGISTER FOR A COURSE</h1>
-		</header>
-		<div class="elec">
-			<h1>Basic Electronics for Beginners</h1>
-			<h2>Components</h2>
-				<ul>
-				  <li>Resistors</li>
-				  <li>Capacitors</li>
-				  <li>Inductors</li>
-				  <li>Diodes</li>
-				  <li>Transistors</li>
-				</ul>
-			<div class="elec-con">
-				<h2>Circuits</h2>
-				<ul>
-				  <li>Series circuits</li>
-				  <li>Parallel circuits</li>
-				  <li>Combinational circuits</li>
-				  <li>Sequential circuits</li>
-				</ul>
-				<h2>Applications</h2>
-				<ul>
-				  <li>Analog electronics</li>
-				  <li>Digital electronics</li>
-				  <li>Power electronics</li>
-				  <li>Control systems</li>
-				  <li>Robotics</li>
-				</ul>
-			</div>
-			<a href="">
-				<button> Apply</button>
-			</a>
-		</div>
-		<div class="emb">
-			<h1>Embedded System</h1>
-			<h2>Components</h2>
-			<ul>
-				<li>Microcontroller</li>
-			    <li>Sensors</li>
-			    <li>Actuators</li>
-			    <li>Power supply</li>
-			</ul>
-			<div class="emb-cont">
-				<h2>How it works</h2>
-				<p>My embedded system works by taking input from sensors and using that input to control actuators. The microcontroller is the brains of the system, and it is responsible for reading the sensors, making decisions, and controlling the actuators.</p>
+    <!-- Header -->
+    <header class="dashboard-header">
+        <h1>Available Programmes</h1>
+    </header>
 
-				<h2>Applications</h2>
-				<p>My embedded system can be used for a variety of applications, including:</p>
+    <!-- Courses Grid -->
+    <div class="courses-grid">
+        {% for course in courses %}
+        <section class="course">
+            <h2 class="toggle-details">{{ course.name }}</h2>
 
-				<ul>
-				    <li>Controlling temperature</li>
-				    <li>Monitoring water levels</li>
-				    <li>Detecting motion</li>
-				</ul>
+            {% if course.description %}
+            <p>{{ course.description }}</p>
+            {% endif %}
 
-				<h2>Conclusion</h2>
-				<p>My embedded system is a versatile and powerful tool that can be used for a variety of applications. I am excited to see what I can create with it!</p>
-			</div>
-			<a href="">
-				<button> Apply</button>
-			</a>
-		</div>
-		<div class="netw">
-			<h1>Networking Basics</h1>
-			<h2>What is Networking?</h2>
-			<p>Networking is the process of connecting computers and devices together to share resources, data, and applications.</p>
-			<div class="netw-cont">
-				<h2>Network Types</h2>
+            {% if course.components %}
+            <div class="course-section">
+                <h3>Components</h3>
+                <ul>
+                    {% for item in course.components|split:"," %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
 
-				<ul>
-				  <li>LAN (Local Area Network): A network that connects devices within a small geographic area, such as a home or office.</li>
-				  <li>WAN (Wide Area Network): A network that connects devices over a larger geographic area, such as a city or country.</li>
-				  <li>MAN (Metropolitan Area Network): A network that connects devices within a specific metropolitan area.</li>
-				</ul>
+            {% if course.applications %}
+            <div class="course-section">
+                <h3>Applications</h3>
+                <ul>
+                    {% for app in course.applications|split:"," %}
+                    <li>{{ app }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
 
-				<h2>Network Components</h2>
+            <!-- Hidden details -->
+            <div class="course-details">
+                {% if course.details %}
+                {{ course.details|safe }}
+                {% endif %}
+            </div>
 
-				<ul>
-				  <li>Nodes: Computers, servers, printers, and other devices connected to the network.</li>
-				  <li>Links: Cables, wires, or wireless connections that connect nodes.</li>
-				  <li>Protocols: Rules and standards that govern how data is transmitted over the network.</li>
-				</ul>
-
-				<h2>Network Topologies</h2>
-
-				<ul>
-				  <li>Bus Topology: All nodes are connected to a single central cable.</li>
-				  <li>Ring Topology: Nodes are connected to each other in a circular fashion.</li>
-				  <li>Star Topology: Nodes are connected to a central switch or hub.</li>
-				</ul>
-
-				<h2>Networking Protocols</h2>
-
-				<ul>
-				  <li>TCP/IP (Transmission Control Protocol/Internet Protocol): The most widely used networking protocol suite.</li>
-				  <li>Ethernet: A LAN protocol that uses Ethernet cables to connect nodes.</li>
-				  <li>Wi-Fi: A wireless LAN protocol that uses radio waves to connect devices.</li>
-				</ul>
-
-				<h2>Network Security</h2>
-
-				<p>Network security is important to protect networks from unauthorized access, data breaches, and other threats.</p>
-
-				<ul>
-				  <li>Firewalls: Software or hardware that blocks unauthorized access to a network.</li>
-				  <li>Antivirus software: Programs that protect computers from malicious software.</li>
-				  <li>Encryption: The process of converting data into an unreadable format.</li>
-				</ul>
-			</div>
-			<a href="">
-				<button> Apply</button>
-			</a>
-		</div>
-		<div class="cplus">
-			<h1>C++ Programming </h1>
-			<p>C++ is a programming language that has been in development for over 30 years. It is a general-purpose, case-sensitive, free-form programming language that supports multiple programming paradigms, including procedural, object-oriented, and generic programming. C++ has been used to develop a wide range of software, including operating systems, embedded systems, and scientific applications.</p>
-			<div class="cplus-cont">
-				<h3>Key Features of C++</h3>
-				<div >
-					<ul>
-						<li><i>Portability</i>: C++ is a portable language, meaning that code written for one platform can be easily ported to another platform.</li>
-						<li><i>Efficiency</i>: C++ is an efficient language, meaning that it produces code that is fast and memory-efficient.</li>
-						<li><i>Extensibility</i>: C++ is an extensible language, meaning that it can be customized to meet the needs of specific applications.</li>
-						<li><i>Object-oriented</i>: C++ is an object-oriented language, meaning that it supports the concepts of objects and classes. This makes it possible to develop complex software applications that are easy to maintain and extend.</li>
-						<li><i>Generic programming</i>: C++ supports generic programming, which allows you to write code that can be applied to a wide range of data types.</li>
-						<li><i>Standard library</i>: C++ has a large standard library that provides a wide range of functionality, including support for input/output, containers, and algorithms.</li>
-					</ul>
-				</div>
-				<div>
-					<h3>Applications of C++</h3>
-					<p>C++ is used in a wide range of applications, including:</p>
-					<ul>
-						<li><i>Operating systems</i>: C++ is used to develop operating systems, such as Windows, macOS, and Linux.</li>
-						<li><i>Embedded systems</i>: C++ is used to develop embedded systems, such as automotive systems and medical devices.</li>
-						<li><i>Scientific applications</i>: C++ is used to develop scientific applications, such as simulations and data analysis programs.</li>
-						<li><i>Business applications</i>: C++ is used to develop business applications, such as customer relationship management (CRM) systems and enterprise resource planning (ERP) systems.</li>
-						<li><i>Game development</i>: C++ is used to develop video games and other game software.</li>
-					</ul>
-				</div>
-			</div>
-			<a href="">
-				<button> Apply</button>
-			</a>
-		</div>
-		<div class="game-dev">
-			<h1>Game Development with C++ & Unreal Engine</h1>
-			<h3>Introduction</h3>
-			<ul>
-				<li>C++ is a popular programming language for game development due to its efficiency, performance, and low-level control.</li>
-				<li>It provides direct access to hardware resources and allows for precise control over game mechanics.</li>
-			</ul>
-			<div class="game-dev-cont">
-				<h3>Game Engine Libraries</h3>
-				<ul>
-					<li>Game engines provide essential tools and frameworks for game development, such as graphics, physics, sound, and input handling.</li>
-					<li>Popular C++ game engines include Unreal Engine, Unity, and Godot.</li>
-				</ul>
-				<h3>Graphics Programming</h3>
-				<ul>
-					<li>C++ supports advanced graphics programming techniques using libraries like OpenGL and DirectX.</li>
-					<li>Developers can create complex 3D models, manage textures, and implement lighting and shading effects.</li>
-				</ul>
-				<h3>Physics Simulation</h3>
-				<ul>
-					<li>C++ enables the use of physics engines, such as Bullet and Havok, to simulate realistic object interactions.</li>
-					<li>Developers can create physics-based games, implement gravity, collisions, and other physical effects.</li>
-				</ul>
-				<h3>Artificial Intelligence</h3>
-				<ul>
-					<li>C++ supports various AI techniques, including pathfinding, state machines, and machine learning.</li>
-					<li>Developers can program intelligent behaviors for NPCs, enemy AI, and other game mechanics.</li>
-				</ul>
-				<h3>Multithreading and Networking</h3>
-				<ul>
-					<li>C++ enables multithreading to improve game performance and handle concurrent tasks.</li>
-					<li>Developers can implement network-based multiplayer games, handle server-client communication, and manage online gameplay.</li>
-				</ul>
-				<h3>Advantages of C++ for Game Development</h3>
-				<ul>
-					<li><b>High Performance:</b>C++ is a compiled language that produces highly optimized code, resulting in faster execution and smoother gameplay.
-					</li>
-					<li><b>Low-Level Control:</b> C++ provides direct access to system resources and hardware, allowing for precise control over game mechanics.</li>
-					<li><b>Code Reusability:</b> C++ supports object-oriented programming, facilitating code reuse and modular development.</li>
-					<li><b>Community and Resources:</b> C++ has a large and active community, providing extensive documentation, tutorials, and support.</li>
-				</ul>
-			</div>
-			<a href="">
-				<button> Apply</button>
-			</a>
-		</div>
-		<div class="ani">
-			<h1>Animation with Maya</h1>
-		  	<p>Maya is a powerful 3D animation software that is used to create everything from feature films to video games. It has a wide range of features that allow animators to create realistic and engaging animations.</p>
-		  	<div class="ani-cont">
-		  		<h2>Keyframing</h2>
-			  	<p>Keyframing is the process of setting key poses for an object at specific points in time. This is the most basic type of animation in Maya, and it is used to create simple movements such as walking or running.</p>
-				 <ol>
-				 	<li>Select the object you want to animate.</li>
-				    <li>Click on the "Animation" menu and select "Keyframe".</li>
-				    <li>Set the key pose for the object at the current time.</li>
-				    <li>Move the timeline forward and set the next key pose.</li>
-				    <li>Continue setting key poses until you have created the entire animation.</li>
-				  </ol>
-			    <h2>Tweening</h2>
-			    <p>Tweening is the process of creating intermediate frames between two key poses. This is used to smooth out the animation and make it more fluid.</p>
-				<ol>
-					<li>Select the two key poses you want to tween.</li>
-				    <li>Click on the "Animation" menu and select "Tween".</li>
-				    <li>Maya will automatically create intermediate frames between the two key poses.</li>
-				</ol>
-			    <h2>Motion Capture</h2>
-			    <p>Motion capture is the process of recording the movement of a live actor and using it to create an animation. This can be used to create realistic animations of human characters.</p>
-			    <ol>
-			    	<li>Set up a motion capture system.</li>
-				    <li>Have the actor perform the desired movement.</li>
-				    <li>The motion capture system will record the actor's movement.</li>
-				    <li>Import the motion capture data into Maya.</li>
-				    <li>Create an animation based on the motion capture data.</li>
-			    </ol>
-			    <h2>Animation Tools</h2>
-			    <p>Maya has a wide range of animation tools that can be used to create complex animations. These tools include:</p>
-			    <ul>
-				    <li>The Graph Editor</li>
-				    <li>The Dope Sheet</li>
-				    <li>The Animation Layer Manager</li>
-				    <li>The Pose Editor</li>
-				    <li>The Motion Path Editor</li>
-			    </ul>
-			  	<h2>Conclusion</h2>
-			  	<p>Maya is a powerful 3D animation software that can be used to create realistic and engaging animations. It has a wide range of features that allow animators to create animations of all types, from simple to complex.</p>
-		  	</div>
-		  	<a href="">
-				<button> Apply</button>
-			</a>
-		</div>
-	</div>
-	</div>	
-
-{% endblock content%}
+            {% if course.id in applied_courses_ids %}
+            <button class="btn applied" disabled>Already Applied</button>
+            {% else %}
+            <a href="{% url 'apply_course' course.id %}" class="btn">Apply</a>
+            {% endif %}
+        </section>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

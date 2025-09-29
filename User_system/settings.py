@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+from django.contrib.messages import constants as messages
+from django.urls import reverse_lazy
 from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-1ls&hf3-$6v1dv^weqmat9ey^9203cw5_u=q(s)he@j6#$2$m=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1","10.0.2.15"]
+ALLOWED_HOSTS = ["*"]
 
 #user model
 AUTH_USER_MODEL = 'Users.User'
@@ -71,6 +73,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'User_system.wsgi.application'
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 
 # Database
@@ -121,7 +124,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 #custom login url
-LOGIN_URL = '/en/login'
+LOGIN_URL = reverse_lazy("login_")
+LOGIN_REDIRECT_URL = reverse_lazy("dashboard") 
+LOGOUT_REDIRECT_URL = reverse_lazy("login_")   # after logout
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

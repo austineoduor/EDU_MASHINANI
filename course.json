@@ -1,0 +1,66 @@
+[
+  {
+    "model": "Users.user",
+    "pk": 1,
+    "fields": {
+      "username": "student1",
+      "password": "pbkdf2_sha256$600000$2nqzJ3sSxEoF7E7WbA6wB3$gAf3k3sAQy9w9L8uM3mj5v4X0j5Sryo4F5zfnxkVnlI=",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true
+    }
+  },
+  {
+    "model": "Users.course",
+    "pk": 1,
+    "fields": {
+      "name": "Basic Electronics",
+      "description": "Fundamentals of electronics, circuits and components.",
+      "components": "Resistors, Capacitors, Inductors, Transistors",
+      "applications": "Digital systems, Robotics, IoT",
+      "category": "Electronics"
+    }
+  },
+  {
+    "model": "Users.course",
+    "pk": 2,
+    "fields": {
+      "name": "Embedded Systems",
+      "description": "How hardware and software interact in embedded devices.",
+      "components": "Microcontrollers, Sensors, Actuators",
+      "applications": "Smart devices, IoT, Wearables",
+      "category": "Programming"
+    }
+  },
+  {
+    "model": "Users.course",
+    "pk": 3,
+    "fields": {
+      "name": "Networking Basics",
+      "description": "Introduction to networks, topologies, and TCP/IP.",
+      "components": "Routers, Switches, Hubs",
+      "applications": "LAN, Internet, Security",
+      "category": "Networking"
+    }
+  },
+  {
+    "model": "Users.usercourse",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "course": 1,
+      "status": "applied",
+      "score": 85
+    }
+  },
+  {
+    "model": "Users.usercourse",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "course": 2,
+      "status": "in_progress",
+      "score": null
+    }
+  }
+]

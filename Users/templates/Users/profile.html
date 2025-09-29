@@ -1,28 +1,42 @@
 {% extends "base.html" %}
-<!-- <link rel="stylesheet" type="text/css" href="../../static/Users/dashboard.css"> -->
 
 {% block profile %}
-<div>
-	<div>
-		<h1>Your Profile Details</h1>
-		{% if user.username or user.location %}
-			{%if user.usrname%}
-				<p>{{ user.username}}</p>
-			{% endif %}
-			{% if user.location %}
-				<p>From <a href="http://maps.google.com/?q={{user.location}}">{{user.location}}</a></p>
-			{% endif %}
-		{% endif  %}
-		{% if user.about %}
-			<p>{{user.about}}</p>
-		{% endif  %}
-	</div>
-</div>
-<div>
-	<ul>
-		{% for course in coures %}
-		<li>{{course.name}} {{course.score}}</li>
-		{% endfor %}
-	</ul>
+{% block title %} profile {% endblock title %}
+<div class="profile-container">
+    <!-- Profile Header -->
+    <header>
+        {% if user.username %}
+        <h1>
+            <strong>{{ user.username.upper }}'S</strong>
+            Profile Details
+        </h1>
+        {% endif %}
+        
+    </header>
+
+    <!-- User Information -->
+    <section class="user-info">
+        {% if user.location %}
+            <p><strong>Location:</strong> <a href="http://maps.google.com/?q={{ user.location }}" target="_blank">{{ user.location }}</a></p>
+        {% endif %}
+
+        {% if user.about %}
+            <p><strong>About:</strong> {{ user.about }}</p>
+        {% endif %}
+    </section>
+
+    <!-- Courses -->
+    <section class="user-courses">
+        <h2>Your Courses</h2>
+        {% if courses %}
+            <ul>
+                {% for course in courses %}
+                    <li>{{ course.name }} - Score: {{ course.score }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You have not registered for any courses yet.</p>
+        {% endif %}
+    </section>
 </div>
 {% endblock profile %}

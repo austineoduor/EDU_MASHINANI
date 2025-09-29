@@ -2,14 +2,12 @@
 <html lang="en">
 {% load static %}
     <head>
-        <title>
-            {% block title %}Index{% endblock title %}
-        </title>
-        <link rel="stylesheet" href="{% static 'Users/base_style.css'  %}">
-        <!--<link rel="stylesheet" href="../../static/Users/base_style.css">-->
+        <title>{% block title %}Index{% endblock title %}</title>
+        <link rel="stylesheet" href="{% static 'Users/Register_Login.css' %}">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" 
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>    
     <body>
         <section class="container">
@@ -21,25 +19,23 @@
 
         <section class="container">
             <div class="content">
-                <div class="form_container">
+                <div class="form_container" data-show-register="{% if show_register %}true{% else %}false{% endif %}">
                     <div class="reg-login">
                         <div id="log" class="form-login">
-                            {%  block login %}
-                            {% endblock login %}
+                            {% include 'Users/login.html'%}
                         </div>
                         <div id="reg" class="form-register">
-                            {% block reg %}
-                            {% endblock reg %}
+                            {% include 'Users/register.html' %}
                         </div>
                     </div>
                     <div class="panels-container">
                         <div class="panel left-panel">
                             <div class="content">
-                                <h3>Already a Member</h3>
-                                <p>Login to continue</p>
+                                <h3>Already a Member ?</h3>
+                                <p>Please Login</p>
                                 <button class="btn" id="sign-in-btn">Login</button>
                             </div>
-                            <img src="../../static/images/signin.svg" alt="" class="image">
+                            <img src="{% static 'images/signin.svg' %}" alt="" class="image">
                         </div>
                         <div class="panel right-panel">
                             <div class="content">
@@ -48,11 +44,11 @@
                                 <button class="btn" id="sign-up-btn">Register</button>
                                 
                             </div>
-                            <img src="../../static/images/signup.svg" alt="" class="image">
+                            <img src="{% static 'images/signup.svg' %}" alt="" class="image">
                         </div>
                     </div>
                 </div>
-                <script src="../../static/scripts/log_reg.js"></script>
+                <script src="{% static 'scripts/log_reg.js' %}"></script>
             </div>
         </section>
     </body>

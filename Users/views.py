@@ -1,92 +1,107 @@
-from django.shortcuts import render, redirect
-from django.contrib.messages import error
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .middle_drive import hash_pwd, is_valid, get_user
-from .models import UserData, User
-from User_system import settings
+from .models import UserData, User, Course, UserCourse
+from django.conf import settings
 #from django.http import HttpResponse
 # Create your views here.
 
-details = {}
-
 def login_(request):
-    messages.used = True
     if request.method == "POST":
         username = request.POST.get("username")
-        pwd = request.POST.get("pwd")
-        if username != None and pwd != None:
-            userobject = get_user(username)
-            if userobject is not None:
-                # print(userobject)
-                if username == userobject['email']:
-                    if is_valid(userobject.get('password'), pwd):
-                        user = authenticate(request, username=userobject['first_name'], password=pwd)
-                        if user is not None:
-                            nxt = request.POST.get('next')
-                            print('redirect to: ' + nxt)
-                            login(request, user)
-                            if nxt is not None and nxt.startswith('/en') == True:
-                                return redirect(str(nxt))
-                            else:
-                                return redirect('dashboard')
-                                
-                        else:
-                            error(request, "You have no permission for this page")
-                            return redirect(f"{settings.LOGIN_URL}?next={request.path}")
+        password = request.POST.get("password")
+
+        user = authenticate(request, username=username, password=password)
+        if user:
+            login(request, user)
+            nxt = request.POST.get('next')
+            if nxt and nxt.startswith('/en'):
+                return redirect(str(nxt))
+            return redirect(settings.LOGIN_REDIRECT_URL)      
+        else:
+            messages.error(request, "Invalid Email/Username or password")
+            return redirect(f"{settings.LOGIN_URL}?next={request.path}") 
                         
-    error(request, "wrong username or passwords")
-    return render(request, 'Users/login.html')
+    return render(request, 'index.html', {"show_register": False})
 
 def register_(request):
-    details.clear()
-    messages.used = True
     if request.method == "POST":
-        fname = request.POST.get("fname")
-        if fname == None or fname == '':
-            error(request, "first name required")
-        mname = request.POST.get("mname")
-        if mname == None or fname == '':
-            error(request, "valid required!")
-        lname = request.POST.get("lname")
-        if lname == None or lname == '':
-             error(request, "last name required!")
-        email = request.POST.get("email")
-        if email == None or email == '':
-             error(request, "Email required")
-        pwd = request.POST.get("pwd")
-        c_pwd = request.POST.get("c_pwd")
-        if pwd != None or c_pwd != None or pwd != "" or c_pwd !="":
-            if pwd != c_pwd:
-                error(request, "requires similar passwords")
-            else:
-                hashed_pwd = hash_pwd(pwd)
-                member = UserData(
-                    first_name = fname,
-                    middle_name = mname,
-                    last_name = lname,
-                    email = email,
-                    password = hashed_pwd
-                    )
-                member.save()
 
-                user = User.objects.create_user(
-                    first_name = fname,
-                    last_name = lname,
-                    username = fname
-                    )
-                user.set_password(pwd)
-                user.save()
-                return redirect('login_')
+        first_name = request.POST.get("first_name")
+        middle_name = request.POST.get("middle_name")
+        last_name = request.POST.get("last_name")
+        email = request.POST.get("email")
+        pwd1 = request.POST.get("password1")
+        pwd2 = request.POST.get("password2")
+
+        if not first_name or not last_name or not email:
+            messages.error(request, "First name, last name, and email are required")
+            # return render(request, "index.html", {"show_register": True})
+
+        elif pwd1 != pwd2:
+            messages.error(request, "Passwords do not match")
+            # return render(request, "index.html",  {"show_register": True})
+        
+
+        # Create Django User (use email as username for uniqueness)
+        elif User.objects.filter(username=email).exists():
+            messages.error(request, "Email already registered")
+            # return render(request, "index.html",  {"show_register": True})
+        
+        # Save in custom UserData with bcrypt hash
         else:
-            error(request, "Cannot be Empty")
-    return render(request, 'Users/register.html')
+            member = User.objects.create_user(
+                username=email,
+                first_name = first_name,
+                last_name = last_name,
+                email = email,
+                password = pwd1
+                )
+         # Create linked UserData
+        UserData.objects.create(
+            user=member,
+            middle_name=middle_name
+        )
+        
+        messages.success(request, "Account created successfully. Please log in.")
+        return redirect("login_")
+    
+    return render(request, 'index.html', {"show_register": True})
 
 @login_required
 def dashboard(request):
-    return render(request, 'Users/dashboard.html', {'details': details})
+    user = request.user
+    user_data = getattr(user, "userdata", None)
+    courses = Course.objects.all()
+    user_courses = UserCourse.objects.filter(user=request.user)
+
+    applied_courses_ids = user_courses.values_list("course_id", flat=True)
+    context = {
+        
+        "user": user,
+        "user_data": user_data,
+        "courses": courses,
+        "user_courses": user_courses,
+        "applied_courses_ids": applied_courses_ids,
+    }
+    return render(request, 'Users/dashboard.html', context)
+
+@login_required
+def apply_course(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+
+    user_course, created = UserCourse.objects.get_or_create(
+        user=request.user, course=course
+    )
+    if created:
+        messages.success(request, f"You have successfully applied for {course.name}")
+    else:
+        messages.info(request, f"You already applied for {course.name}")
+
+    return redirect("dashboard")
 
 @login_required
 def profile(request, id):
@@ -94,4 +109,4 @@ def profile(request, id):
 
 def logout_(request):
     logout(request)
-    return render (request, "Users/login.html")
+    return redirect(settings.LOGOUT_REDIRECT_URL)

@@ -38,6 +38,7 @@
     width: 137%;
     height: 101%;
     display: flex;
+    /* flex-direction: column; */
     align-items: center;
     justify-content: space-around;
     z-index: 5;
@@ -56,11 +57,12 @@ form {
 }
 
 fieldset {
+    padding: 10px;
+    border-radius: 15px;
+    border: 2px dotted rgba(61, 43, 19, 0.4);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     display: flex;
-    border-color: rgb(61, 43, 19);
-    border-style: dotted;
-    border-radius: 20px;
-    /* margin-right: -85px; */
+    margin-right: -85px;
     flex-direction: column;
 }
 
@@ -129,6 +131,9 @@ legend, label {
 }
 
 .panel {
+    /* background: linear-gradient(135deg,#8b2acc,#229eb4); */
+    border-radius: 15px;
+    padding: 40px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -138,6 +143,7 @@ legend, label {
     padding: 0 10px;
     text-align: center;
     z-index: 6;
+    transition: transform 0.5s ease;
 }
 
 .left-panel {
@@ -209,12 +215,18 @@ legend, label {
     transform: translateX(0);
 }
 
+.form-login, .form-register {
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
 .form-register-mode .form-login {
     opacity: 0;
+    transform: translateX(-50px);
 }
 
 .form-register-mode .form-register {
     opacity: 1;
+    transform: translateX(0);
 }
 
 .form-register-mode .right-panel {
@@ -243,16 +255,19 @@ legend, label {
 
 /* error message */
 .err {
-
-	background-color: #cedfbd;
-	border-radius: 3px;
+    background-color: #ffe0e0;
+    border-left: 10px solid #d34848;
+    color: #a70000;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 500;
 }
 
 .err > p {
-	margin-top: -8px;
+	margin-top: -6px;
 	text-align: center;
-	font-size: 17px;
-	color: #d34848;
 }
 
 .user_ {
@@ -301,33 +316,50 @@ legend, label {
 
 
 input {
+   /* padding: 12px 15px; */
+   font-size: 1rem;
+   border-radius: 8px;
+   border: 1.5px dotted;
+   transition: 0.3s ease;
    background-color: rgb(216, 236, 236);
-   border-radius: 5px;
    border-color: rgb(163, 148, 130);
-   border-style: dotted;
    height: 30px;
 }
 
+input[type=password]:focus{
+    border: 3px dotted #089b63;
+}
 
 input[type=text]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus
  {
+    /* border-color: #8b2acc; */
+    box-shadow: 0 0 5px rgba(139,42,204,0.3);
     border: 3px dotted rgb(184, 34, 184);
-    background-color: aliceblue;
+    background-color: #fefefe;
+}
+
+input[type=submit] {
+
+    background: linear-gradient(135deg,#8b2acc,#229eb4);
+    padding: 9px 15px;
+    transition: 0.3s;
+    color: antiquewhite;
+    border-radius: 40px;
+    border: 2px dotted #349add;
+    font-weight: bold;
+    font-size: 15px;
+    font-style: italic;
+    cursor: pointer;
 }
 
 input[type=submit]:hover {
-    background-color: rgb(74, 62, 207);
-    color: antiquewhite;
-    border: 3px dotted #349add;
-    font-size: 15px;
-    font-style: italic;
-    font-weight: bold;
+    opacity: 0.9;
+    transform: scale(1.03);
 }
-input[type=password]:focus{
-    border: 3px dotted #089b63;
-}
+
+
 
 .account-text {
     margin-top: -18px;
@@ -361,36 +393,37 @@ input[type=password]:focus{
 }
 
 .pw-toggle {
-  position: absolute;
   left: 9.0rem;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  height: 2rem;
-  width: 2.2rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  outline: none;
-}
-.pw-toggle-log{
-  left: 9.3rem;
-  position: absolute;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  height: 2rem;
-  width: 2.2rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  outline: none;
 }
 
+.pw-toggle-log{
+  left: 9.3rem;
+}
+
+.pw-toggle, .pw-toggle-log {
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+    position: absolute;
+    transform: translateY(-50%);
+    background: transparent;
+    top: 50%;
+    width: 2.2rem;
+    height: 2rem;
+    outline: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    transition: 0.2s;
+}
 .pw-toggle-log:focus,
 .pw-toggle:focus {
-    box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+    box-shadow: 0 0 0 3px rgba(198, 227, 235, 0.973);
     border-radius: 4px;
+}
+
+.pw-toggle:hover, .pw-toggle-log:hover {
+    color: #8b2acc;
 }
 
 /* visually-hidden util */

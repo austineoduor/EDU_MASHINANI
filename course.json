@@ -3,44 +3,90 @@
     "model": "Users.user",
     "pk": 1,
     "fields": {
-      "username": "student1",
-      "password": "pbkdf2_sha256$600000$2nqzJ3sSxEoF7E7WbA6wB3$gAf3k3sAQy9w9L8uM3mj5v4X0j5Sryo4F5zfnxkVnlI=",
-      "is_superuser": false,
+      "email": "kelvin@example.com",
+      "username": "kelvin123",
+      "first_name": "Kelvin",
+      "last_name": "Austine",
+      "is_active": true,
       "is_staff": false,
-      "is_active": true
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$600000$abcdEfGh123$8Qp4K9yV9Jo5LZuv4sgmbftK1Yw0bA4VE2i0nIB0c8M=",
+      "date_joined": "2025-09-30T10:00:00Z"
+    }
+  },
+  {
+    "model": "Users.user",
+    "pk": 2,
+    "fields": {
+      "email": "austin@example.com",
+      "username": "austin88",
+      "first_name": "Austin",
+      "last_name": "Coder",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$600000$ijklMnop456$Wb7mJk7r2t4G+tiErE4FJ/3Q4JX9Y7oxgRZC7w5v6Gs=",
+      "date_joined": "2025-09-29T14:30:00Z"
+    }
+  },
+  {
+    "model": "Users.userdata",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "middle_name": "Kamau",
+      "location": "Nairobi, Kenya",
+      "about": "Full-stack developer and Python enthusiast.",
+      "created_at": "2025-09-30T10:05:00Z",
+      "updated_at": "2025-09-30T10:05:00Z"
+    }
+  },
+  {
+    "model": "Users.userdata",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "middle_name": null,
+      "location": "Mombasa, Kenya",
+      "about": "Loves building Django apps and learning new technologies.",
+      "created_at": "2025-09-29T14:35:00Z",
+      "updated_at": "2025-09-29T14:35:00Z"
     }
   },
   {
     "model": "Users.course",
     "pk": 1,
     "fields": {
-      "name": "Basic Electronics",
-      "description": "Fundamentals of electronics, circuits and components.",
-      "components": "Resistors, Capacitors, Inductors, Transistors",
-      "applications": "Digital systems, Robotics, IoT",
-      "category": "Electronics"
+      "name": "Python Basics",
+      "description": "Learn the fundamentals of Python programming.",
+      "components": ["Variables", "Loops", "Functions", "OOP"],
+      "applications": ["Web Development", "Data Analysis", "Machine Learning"],
+      "category": "Programming",
+      "created_at": "2025-09-25T08:00:00Z"
     }
   },
   {
     "model": "Users.course",
     "pk": 2,
     "fields": {
-      "name": "Embedded Systems",
-      "description": "How hardware and software interact in embedded devices.",
-      "components": "Microcontrollers, Sensors, Actuators",
-      "applications": "Smart devices, IoT, Wearables",
-      "category": "Programming"
+      "name": "Web Development with Django",
+      "description": "Build dynamic web applications using Django.",
+      "components": ["HTML", "CSS", "JavaScript", "Django"],
+      "applications": ["Website Design", "Web Applications"],
+      "category": "Web Development",
+      "created_at": "2025-09-26T09:00:00Z"
     }
   },
   {
     "model": "Users.course",
     "pk": 3,
     "fields": {
-      "name": "Networking Basics",
-      "description": "Introduction to networks, topologies, and TCP/IP.",
-      "components": "Routers, Switches, Hubs",
-      "applications": "LAN, Internet, Security",
-      "category": "Networking"
+      "name": "Data Science Foundations",
+      "description": "Introduction to data analysis, visualization, and machine learning concepts.",
+      "components": ["Pandas", "Numpy", "Matplotlib", "Scikit-Learn"],
+      "applications": ["Data Analysis", "Predictive Modeling"],
+      "category": "Data Science",
+      "created_at": "2025-09-28T11:00:00Z"
     }
   },
   {
@@ -49,8 +95,9 @@
     "fields": {
       "user": 1,
       "course": 1,
-      "status": "applied",
-      "score": 85
+      "status": "in_progress",
+      "score": 75,
+      "applied_at": "2025-09-30T10:10:00Z"
     }
   },
   {
@@ -59,8 +106,21 @@
     "fields": {
       "user": 1,
       "course": 2,
-      "status": "in_progress",
-      "score": null
+      "status": "applied",
+      "score": null,
+      "applied_at": "2025-09-30T10:12:00Z"
+    }
+  },
+  {
+    "model": "Users.usercourse",
+    "pk": 3,
+    "fields": {
+      "user": 2,
+      "course": 1,
+      "status": "completed",
+      "score": 90,
+      "applied_at": "2025-09-29T15:00:00Z"
     }
   }
 ]
+

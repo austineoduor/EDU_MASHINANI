@@ -5,18 +5,20 @@
             <div class="form-h">
                 <legend> Login</legend>
             </div>
-            <div id="" class="form-log-fields">
+            <div id="" class="form-log-fields" role="alert">
                 {% if messages %}
                     <div class="err">
                         {% for message in messages %}
-                            <p>{{message}}</p>
+                            {% if 'login' in message.tags %}
+                                <p>{{ message }}</p>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 {% endif %}
 
                 <div>
-                <label for="username">Email</label>
-                <input type="text" id="username" name="username" required><br>
+                <label for="username">Email/Username</label>
+                <input type="text" id="username" name="username" required autocomplete="username"><br>
 
                 <input type="hidden" name="next" value="{{request.GET.next}}">
                 </div>

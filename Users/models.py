@@ -12,8 +12,14 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.exceptions import ValidationError
+import re
 import json
 
+def validate_about_length(value):
+    word_count = len(re.findall(r'\w+', value))
+    if word_count > 250:
+        raise ValidationError(f"About section cannot exceed 250 words. Currently, it has {word_count} words.")
 
 class User(AbstractUser):
     """Custom user model extending Django's AbstractUser.
@@ -41,13 +47,12 @@ class UserData(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     middle_name = models.CharField(max_length=150, blank=True, null=True)
     location = models.CharField(max_length=200, blank=True, null=True)
-    about = models.TextField(blank=True, null=True)
+    about = models.TextField(blank=True, null=True, validators=[validate_about_length])  # Added validator
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.user.get_full_name() or self.user.username}'s profile"
-
+        return f"{self.user.get_full_name() or self.user.username}"
 
 class Course(models.Model):
     """Available courses for users to register.
@@ -58,8 +63,8 @@ class Course(models.Model):
     """
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
-    components = models.TextField(blank=True, null=True)
-    applications = models.TextField(blank=True, null=True)
+    components = models.JSONField(blank=True, null=True, default=list)
+    applications = models.JSONField(blank=True, null=True, default=list)
     category = models.CharField(max_length=100, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -97,11 +102,13 @@ class Course(models.Model):
 
 class UserCourse(models.Model):
     """Mapping of users to courses with status & progress tracking."""
+    STATUS_NOT_APPLIED = "not_applied"
     STATUS_APPLIED = "applied"
     STATUS_IN_PROGRESS = "in_progress"
     STATUS_COMPLETED = "completed"
 
     STATUS_CHOICES = [
+        (STATUS_NOT_APPLIED , "Not Applied"),
         (STATUS_APPLIED, "Applied"),
         (STATUS_IN_PROGRESS, "In Progress"),
         (STATUS_COMPLETED, "Completed"),
@@ -109,14 +116,26 @@ class UserCourse(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="courses")
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="students")
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=STATUS_APPLIED)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=STATUS_NOT_APPLIED)
     # Score is constrained between 0 and 100; change validators if you use a different scale
     score = models.PositiveIntegerField(blank=True, null=True, validators=[MinValueValidator(0), MaxValueValidator(100)])
     applied_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together = ("user", "course")
+        # unique_together = ("user", "course")
+        constraints = [
+            models.UniqueConstraint(fields=["user", "course"], name="unique_user_course")
+        ]
         ordering = ["course__name"]
+
+    @property
+    def is_completed(self):
+        return self.status == self.STATUS_COMPLETED
+    
+    @property
+    def can_apply(self):
+        return self.status == self.STATUS_NOT_APPLIED
 
     def __str__(self):
         return f"{self.user.username} → {self.course.name} ({self.status})"

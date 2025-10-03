@@ -30,6 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // Backend auto-switch
         if (container.dataset.showRegister === "true") {
             container.classList.add("form-register-mode");
+        } else {
+            container.classList.remove('show-register');
         }
     }
 
@@ -91,10 +93,57 @@ function toggleCourseDetails() {
         this.setAttribute("aria-expanded", "true");
     }
 }
-    const navToggle = document.getElementById("nav-toggle");
-            const navMenu = document.getElementById("nav-menu");
 
-            navToggle.addEventListener("click", () => {
-                navMenu.classList.toggle("active");
-            });
+const navToggle = document.getElementById("nav-toggle");
+        const navMenu = document.getElementById("nav-menu");
+
+        navToggle.addEventListener("click", () => {
+            navMenu.classList.toggle("active");
+        });
+
+const alerts = document.querySelectorAll(".alert");
+alerts.forEach(alert => {
+    setTimeout(() => {
+        alert.classList.add("hide");
+    setTimeout(() => alert.remove(), 500); // wait for fadeOut to finish
+    }, 4000);
+  });
+  
+const aboutField = document.getElementById("about");
+    const wordCountDisplay = document.getElementById("word-count");
+
+    aboutField.addEventListener("input", function() {
+        const wordCount = aboutField.value.split(/\s+/).filter(Boolean).length; // Split by spaces
+        wordCountDisplay.textContent = `Word count: ${wordCount}/250`;
+
+        if (wordCount > 250) {
+            wordCountDisplay.style.color = 'red';
+        } else {
+            wordCountDisplay.style.color = 'black';
+        }
+    });
 });
+
+function openModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+        modal.style.display = "flex";
+    }
+}
+
+function closeModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    document.querySelectorAll(".modal").forEach((modal) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+};
+

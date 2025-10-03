@@ -1,0 +1,144 @@
+/* Container for Apply Course */
+.apply-course-container {
+    background: rgba(10, 10, 10, 0.6); /* Semi-transparent background */
+    padding: 40px;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 800px;
+    margin: 100px auto; /* Centered on the page */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Heading Styles */
+.apply-course-container h1 {
+    font-size: 2rem;
+    color: #f39c12;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.apply-course-container h2 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.apply-course-container .form-group input,
+.apply-course-container .form-group textarea {
+    width: 30%;
+    padding: 4px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+}
+
+/* Course Description */
+.course-info p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+/* Form Styling */
+form {
+    margin-top: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+
+
+/* Styling the checkboxes */
+input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+/* Button Styles */
+.submit-btn {
+    background: #27ae60;
+    color: white;
+    font-weight: bold;
+    padding: 15px 30px;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: #2ecc71;
+}
+
+.submit-btn:disabled {
+    background: gray;
+    cursor: not-allowed;
+}
+
+/* Link Styles */
+a {
+    color: #1abc9c;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Styling for word count display */
+.word-count {
+    font-size: 14px;
+    color: #aa9999;
+    margin-top: 5px;
+    text-align: left;
+}
+.word-count.red {
+    color: red;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .apply-course-container {
+        width: 90%;
+        padding: 30px;
+    }
+
+    .apply-course-container h1 {
+        font-size: 1.8rem;
+    }
+
+    .apply-course-container h2 {
+        font-size: 1.2rem;
+    }
+
+    .submit-btn {
+        font-size: 1rem;
+    }
+}

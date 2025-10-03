@@ -1,42 +1,82 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block profile %}
-{% block title %} profile {% endblock title %}
+{% block title %} Profile {% endblock title %}
+{% block content%}
 <div class="profile-container">
     <!-- Profile Header -->
-    <header>
+    <header class="profile-header">
         {% if user.username %}
         <h1>
-            <strong>{{ user.username.upper }}'S</strong>
-            Profile Details
+            <strong>{{ user.username|upper }}'S</strong> Profile
         </h1>
         {% endif %}
-        
     </header>
 
-    <!-- User Information -->
-    <section class="user-info">
-        {% if user.location %}
-            <p><strong>Location:</strong> <a href="http://maps.google.com/?q={{ user.location }}" target="_blank">{{ user.location }}</a></p>
-        {% endif %}
+    <div class="profile-content">
+        <!-- User Information Section -->
+        <section class="user-info">
+            <div class="info-item">
+                {% if user.profile.location %}
+                <h3>Location</h3>
+                    <a href="javascript:void(0)" onclick="openModal('locationModal')">View</a>
+                {% endif %}
+            </div>
 
-        {% if user.about %}
-            <p><strong>About:</strong> {{ user.about }}</p>
-        {% endif %}
-    </section>
+            <div class="info-item">
+                {% if user.profile.about %}
+                <h3>About</h3>
+                <a href="javascript:void(0)" onclick="openModal('aboutModal')">View</a>
+                {% endif %}
+            </div>
+        </section>
 
-    <!-- Courses -->
-    <section class="user-courses">
-        <h2>Your Courses</h2>
-        {% if courses %}
-            <ul>
+        <!-- Courses Section -->
+        <section class="user-courses">
+            <h2>Your Courses & Progress</h2>
+            {% if courses %}
+            <ul class="course-list">
                 {% for course in courses %}
-                    <li>{{ course.name }} - Score: {{ course.score }}</li>
+                <li>
+                    <div class="course-item">
+                        <h4>{{ course.course.name }}</h4>
+                        <span class="course-status">
+                            <strong>Stage: {{course.status}}</strong>
+                            Score: {{ course.score|default:"N/A" }}
+                        </span>
+                    </div>
+                </li>
                 {% endfor %}
             </ul>
-        {% else %}
+            {% else %}
             <p>You have not registered for any courses yet.</p>
-        {% endif %}
-    </section>
+            {% endif %}
+        </section>
+    </div>
+    
 </div>
-{% endblock profile %}
+<!-- <script>  src="{% static 'js/log_reg.js' %}" </script> -->
+<!-- Modals -->
+<div id="locationModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('locationModal')">&times;</span>
+        <h2>Location</h2>
+        <p>
+            <a href="http://maps.google.com/?q={{ user.profile.location }}" target="_blank">
+                {{ user.profile.location|default:"Not set" }}
+            </a>
+        </p>
+    </div>
+</div>
+
+<div id="aboutModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+        <h2>About</h2>
+        <div>
+            <p>{{ user.profile.about|default:"No information yet" }}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

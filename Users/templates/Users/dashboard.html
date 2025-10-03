@@ -1,20 +1,31 @@
 {% extends "base.html" %}
 {% load static %}
-{% load helper_extras %}
+<!-- {% load helper_extras %} -->
 
 {% block content %}
 {% block title %} Dashboard {% endblock %}
+<link rel="stylesheet" href="{% static 'Users/dashboard.css' %}">
 <div class="dashboard-container">
 
     <!-- Header -->
     <header class="dashboard-header">
         <h1>Available Programmes</h1>
     </header>
-
+    {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
     <!-- Courses Grid -->
     <div class="courses-grid">
+        
         {% for course in courses %}
         <section class="course">
+        
             <h2 class="toggle-details">{{ course.name }}</h2>
 
             {% if course.description %}
@@ -25,7 +36,7 @@
             <div class="course-section">
                 <h3>Components</h3>
                 <ul>
-                    {% for item in course.components|split:"," %}
+                    {% for item in course.components %}
                     <li>{{ item }}</li>
                     {% endfor %}
                 </ul>
@@ -36,7 +47,7 @@
             <div class="course-section">
                 <h3>Applications</h3>
                 <ul>
-                    {% for app in course.applications|split:"," %}
+                    {% for app in course.applications %}
                     <li>{{ app }}</li>
                     {% endfor %}
                 </ul>

@@ -109,6 +109,74 @@ body::before {
     cursor: not-allowed;
 }
 
+
+/* Hidden course details (ready for JS toggle) */
+.course-details {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    margin-top: 10px;
+}
+
+/* Course details when open */
+/* .course-details.open {
+    max-height: 500px; /* or fit to content size 
+    animation: fadeIn 0.3s ease-in;
+} */
+.course-details.open {
+    display: block;
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* Messages container */
+.messages {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 0 15px;
+}
+
+/* Base alert style */
+.alert {
+    padding: 12px 20px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    animation: fadeInUp 0.5s ease-in-out;
+}
+
+/* Different message types */
+.alert-success {
+    background-color: #e6ffed;
+    color: #1b6e30;
+    border: 1px solid #b0f2c2;
+}
+
+.alert-error {
+    background-color: #ffe6e6;
+    color: #8b1a1a;
+    border: 1px solid #f5bcbc;
+}
+
+.alert-warning {
+    background-color: #fffbe6;
+    color: #8a6d1a;
+    border: 1px solid #ffe58f;
+}
+
+.alert-info {
+    background-color: #e6f7ff;
+    color: #084c61;
+    border: 1px solid #91d5ff;
+}
+
+.alert.hide {
+    animation: fadeOutDown 0.5s ease forwards;
+}
+
 /* Hidden course details (ready for JS toggle)
 .course .course-details {
     display: none;
@@ -143,19 +211,6 @@ body::before {
     color: #4035a7;
 }
 
-.course-details {
-    display: none;
-    margin-top: 10px;
-    overflow: hidden;
-}
-
-/* .course-details.open {
-    max-height: 500px; big enough to fit content
-} */
-.course-details.open {
-    display: block;
-    animation: fadeIn 0.3s ease-in;
-}
 
 /* Responsive Adjustments */
 @media (max-width: 900px) {
@@ -167,4 +222,15 @@ body::before {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-5px); }
     to   { opacity: 1; transform: translateY(0); }
+}
+/* Fade-in animation */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Fade-out down animation */
+@keyframes fadeOutDown {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(15px); }
 }

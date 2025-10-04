@@ -1,0 +1,365 @@
+/* General Styling for Profile Page */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Profile Container */
+.profile-container {
+    max-width: 1100px;
+    margin: -23px auto;
+    padding: 40px;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    animation: fadeIn 0.5s ease-out;
+    background: linear-gradient(135deg, #f4f4f4, #e0e7ef);
+}
+
+/* Profile Header */
+.profile-header{
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+
+    display: flex;
+    /* flex-wrap: wrap; */
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-bottom: 2px solid #eee;
+}
+    
+.profile-header-content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+}
+/* Left Side (Profile Picture) */
+.profile-left {
+    flex-shrink: 0;  /* Prevent profile image from shrinking */
+    margin-right: 20px;
+    margin-bottom: 20px;  
+}
+
+
+.profile-header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #3a3a3a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+/* Member since */
+.profile-header .member-since {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 5px;
+    
+}
+
+
+/* Profile Details */
+.profile-right {
+    flex-grow: 1; /* Make details take up remaining space */
+}
+
+.profile-details {
+    margin-bottom: 20px;
+}
+
+.profile-details a {
+    color: #e0e4e9;
+    text-decoration: none;
+}
+
+.profile-details .member-since,
+.profile-details .info-item {
+    border-bottom: 2px solid #eee;
+}
+
+/* Profile picture */
+.profile-header .profile-picture-container {
+    width: 120px;          /* size of circle */
+    height: 120px;
+    border-radius: 50%;    /* makes it a circle */
+    overflow: hidden;      /* crop anything outside */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 auto;        /* center horizontally */
+    border: 3px solid #ddd; /* optional: nice border */
+}
+
+
+/* Default fallback picture */
+.profile-header .default-profile {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--profle, #6c757d); /* muted gray */
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    border: 3px solid #ddd;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.profile-header .profile-picture{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #ddd;
+}
+.profile-picture img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.profile-right .btn {
+
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+    text-decoration: none;
+    margin-top: 10px;
+    position: relative;
+    bottom: -20px;
+    
+}
+
+.profile-right .btn:hover{
+    background-color: #2ebe9a;
+}
+
+.info-item {
+    background: #fff;
+    padding: 10px;
+    border-radius: 46px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.info-item:hover {
+    transform: translateY(-5px);
+}
+
+.info-item h3 {
+    color: #4d4d4d;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.info-item p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.info-item a {
+    color: #2a7ae2;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.info-item a:hover {
+    text-decoration: underline;
+}
+
+/* Courses Section */
+.user-courses h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.course-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.course-list li {
+    margin-bottom: 20px;
+}
+
+.course-item {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.course-item h4 {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.course-status {
+    font-size: 1rem;
+    color: #888;
+    font-weight: 500;
+}
+
+
+
+/* models */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  background: rgba(0,0,0,0.5);
+}
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 32%;
+  height: 98px;
+  max-height: 200px;
+  max-width: 40%;
+  position: relative;
+  left: 45vh;
+}
+
+.about-box {
+  max-height: 200px;   /* limit vertical space */
+  overflow-y: auto;    /* add scrollbar if text is long */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #f9f9f9;
+  white-space: pre-wrap; /* keep user formatting like new lines */
+}
+.close {
+  position: absolute;
+  top: 10px; right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 20px;
+    }
+
+    .user-info {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-header h1 {
+        font-size: 2rem;
+    }
+
+    .info-item h3 {
+        font-size: 1.1rem;
+    }
+
+    .modal-content{
+        left: 28vh;
+    }
+
+    .info-item p {
+        font-size: 0.9rem;
+    }
+}
+
+/* --------------------- Responsive Layout --------------------- */
+
+/* For screens smaller than 768px (tablets) */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-left {
+        margin-bottom: 10px;
+    }
+
+    .profile-details {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .btn {
+        width: 100%;  /* Full-width button on small screens */
+    }
+}
+
+/* For screens smaller than 480px (phones) */
+@media (max-width: 400px) {
+    .profile-header {
+        padding: 10px;
+    }
+
+    .profile-picture-container {
+        width: 100px; /* Smaller profile picture */
+        height: 100px;
+    }
+
+    .profile-picture img {
+        object-fit: contain; /* Maintain aspect ratio */
+    }
+
+    .profile-details {
+        font-size: 14px; /* Adjust text size for small screens */
+    }
+
+    .btn {
+        padding: 12px; /* Slightly bigger button */
+    }
+}
+/* Keyframe Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,88 @@
+.edit-profile-container{
+    background: linear-gradient(90deg, #9787dd, #79baf7, #71dfb1);
+    
+}
+
+.profile-picture-container {
+    
+    width: 150px;          /* size of circle */
+    height: 150px;
+    border-radius: 50%;    /* makes it a circle */
+    overflow: hidden;      /* crop anything outside */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;        /* center horizontally */
+    border: 3px solid #ddd; /* optional: nice border */
+}
+
+.profile-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* keeps image centered and fills circle */
+}
+
+.edit-profile-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    display: inline-block;
+    margin-left: 10px;
+    padding-bottom: 5px;
+}
+
+.edit-profile-container form {
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.edit-profile-container label {
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.edit-profile-container input[type="text"],
+.edit-profile-container textarea,
+.edit-profile-container input[type="file"] {
+    width: 60%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border 0.3s;
+}
+
+.edit-profile-container input:focus,
+.edit-profile-container textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.edit-profile-container button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.edit-profile-container button:hover {
+    background-color: #065e61;
+}
+
+.edit-profile-container img {
+    display: block;
+    margin: 10px auto;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+

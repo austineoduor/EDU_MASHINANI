@@ -36,8 +36,12 @@ A Django-based learning management system (LMS) prototype where users can regist
   - Application status tracked: `applied`, `in_progress`, `completed`
   - Location and "about" fields required during application
 - **Profile Page**
+  - Profile picture upload
+  - Editable profile fields (location, about, middle name)
+  - Show "member since" date
   - Displays username, location (with Google Maps link), and about section
   - Shows list of courses with progress and scores
+
 - **Admin**
   - Manage courses, users, and applications via Django admin
 
@@ -55,10 +59,6 @@ Here are ideas to enhance the system further:
 - Upload course materials (PDFs, videos, etc.)
 - Add prerequisites (course A must be completed before course B)
 
-### 📑 Profile Enhancements
-- Profile picture upload
-- Editable profile fields (location, about, middle name)
-- Show "member since" date
 
 ### 📬 Notifications
 - Email confirmation after application

@@ -1,3 +1,4 @@
+<title>{% block title%}Login{% endblock %}</title>
 <form action="{% url 'login_' %}" method="POST">
     {% csrf_token %}
     <div class="field-pos">

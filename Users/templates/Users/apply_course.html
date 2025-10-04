@@ -22,7 +22,7 @@
     {% endif %}
 
     {%  if not user_course or user_course.status == "not_applied" %}
-    <form action="{% url 'apply_course' %}" method="POST">
+    <form action="{% url 'apply_course' user.id %}" method="POST">
         {% csrf_token %}
 
         <div class="form-group">

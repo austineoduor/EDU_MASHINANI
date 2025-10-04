@@ -1,0 +1,14 @@
+{% extends "admin/index.html" %}
+{% load static %}
+
+{% block content %}
+{% if request.user.is_superuser %}
+<p>
+    <a href="{% url 'admin:dashboard' %}" class="button" style="background-color:#0b5ed7; color:white; padding:8px 14px; border-radius:5px; text-decoration:none;">
+        📊 Go to Dashboard
+    </a>
+</p>
+{%endif%}
+
+{{ block.super }}
+{% endblock %}

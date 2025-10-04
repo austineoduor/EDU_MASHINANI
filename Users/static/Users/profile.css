@@ -10,7 +10,7 @@ body {
 /* Profile Container */
 .profile-container {
     max-width: 1100px;
-    margin: 40px auto;
+    margin: -23px auto;
     padding: 40px;
     background: #fff;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -20,10 +20,33 @@ body {
 }
 
 /* Profile Header */
-.profile-header {
+.profile-header{
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
+    padding: 1rem;
+
+    display: flex;
+    /* flex-wrap: wrap; */
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-bottom: 2px solid #eee;
 }
+    
+.profile-header-content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+}
+/* Left Side (Profile Picture) */
+.profile-left {
+    flex-shrink: 0;  /* Prevent profile image from shrinking */
+    margin-right: 20px;
+    margin-bottom: 20px;  
+}
+
 
 .profile-header h1 {
     font-size: 2.5rem;
@@ -32,20 +55,107 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     margin: 0;
+    margin-bottom: 1rem;
 }
 
-/* User Information Section */
-.user-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-bottom: 40px;
+/* Member since */
+.profile-header .member-since {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 5px;
+    
+}
+
+
+/* Profile Details */
+.profile-right {
+    flex-grow: 1; /* Make details take up remaining space */
+}
+
+.profile-details {
+    margin-bottom: 20px;
+}
+
+.profile-details a {
+    color: #e0e4e9;
+    text-decoration: none;
+}
+
+.profile-details .member-since,
+.profile-details .info-item {
+    border-bottom: 2px solid #eee;
+}
+
+/* Profile picture */
+.profile-header .profile-picture-container {
+    width: 120px;          /* size of circle */
+    height: 120px;
+    border-radius: 50%;    /* makes it a circle */
+    overflow: hidden;      /* crop anything outside */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 auto;        /* center horizontally */
+    border: 3px solid #ddd; /* optional: nice border */
+}
+
+
+/* Default fallback picture */
+.profile-header .default-profile {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--profle, #6c757d); /* muted gray */
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    border: 3px solid #ddd;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.profile-header .profile-picture{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #ddd;
+}
+.profile-picture img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.profile-right .btn {
+
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+    text-decoration: none;
+    margin-top: 10px;
+    position: relative;
+    bottom: -20px;
+    
+}
+
+.profile-right .btn:hover{
+    background-color: #2ebe9a;
 }
 
 .info-item {
     background: #fff;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 10px;
+    border-radius: 46px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
@@ -121,6 +231,7 @@ body {
 }
 
 
+
 /* models */
 .modal {
   display: none;
@@ -162,6 +273,7 @@ body {
   cursor: pointer;
 }
 
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .profile-container {
@@ -189,6 +301,57 @@ body {
     }
 }
 
+/* --------------------- Responsive Layout --------------------- */
+
+/* For screens smaller than 768px (tablets) */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-left {
+        margin-bottom: 10px;
+    }
+
+    .profile-details {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .btn {
+        width: 100%;  /* Full-width button on small screens */
+    }
+}
+
+/* For screens smaller than 480px (phones) */
+@media (max-width: 400px) {
+    .profile-header {
+        padding: 10px;
+    }
+
+    .profile-picture-container {
+        width: 100px; /* Smaller profile picture */
+        height: 100px;
+    }
+
+    .profile-picture img {
+        object-fit: contain; /* Maintain aspect ratio */
+    }
+
+    .profile-details {
+        font-size: 14px; /* Adjust text size for small screens */
+    }
+
+    .btn {
+        padding: 12px; /* Slightly bigger button */
+    }
+}
 /* Keyframe Animation */
 @keyframes fadeIn {
     from {

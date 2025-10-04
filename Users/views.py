@@ -113,6 +113,41 @@ def profile(request, id):
     }
     return render(request, "Users/profile.html", context)
 
+
+@login_required
+def edit_profile(request, user_id):
+    # Make sure the profile exists
+    user = get_object_or_404(User, id=user_id)
+
+    # Prevent editing other users’ profiles
+    if user != request.user:
+        messages.error(request, "You are not allowed to edit this profile.")
+        return redirect("profile", id=user.id)
+
+    profile = request.user.profile  # thanks to related_name="profile"
+
+    if request.method == "POST":
+        
+        # Handle profile picture upload
+        if "profile_picture" in request.FILES:
+            profile.profile_picture = request.FILES["profile_picture"]
+
+         # Only update if the field is actually present and not empty
+        middle_name = request.POST.get("middle_name")
+        location = request.POST.get("location")
+        about = request.POST.get("about")
+
+        if middle_name or location or about :
+            user.middle_name = middle_name
+            user.location = location
+            user.about = about
+            
+        profile.save()
+        messages.success(request, "Your profile has been updated successfully.")
+        return redirect("profile", id=request.user.id)  # go back to profile page
+
+    return render(request, "Users/edit_profile.html")
+
 @login_required
 def apply_course(request, course_id):
     

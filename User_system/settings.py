@@ -35,7 +35,7 @@ AUTH_USER_MODEL = 'Users.User'
 # Application definition
 
 INSTALLED_APPS = [
-    'Users.apps.UsersConfig',
+    'Users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,6 +127,10 @@ STATIC_URL = 'static/'
 LOGIN_URL = reverse_lazy("login_")
 LOGIN_REDIRECT_URL = reverse_lazy("dashboard") 
 LOGOUT_REDIRECT_URL = reverse_lazy("login_")   # after logout
+
+# media storage
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

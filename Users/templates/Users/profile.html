@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load profile_extras%}
 
 {% block title %} Profile {% endblock title %}
 {% block content%}
@@ -8,29 +9,69 @@
     <header class="profile-header">
         {% if user.username %}
         <h1>
-            <strong>{{ user.username|upper }}'S</strong> Profile
+            <strong>{{ user.username|upper }}'S</strong>
         </h1>
         {% endif %}
+
+        <div class="profile-header-content">
+            
+            <div class="profile-left">
+                <div class="profile-picture-container">
+                    <!-- <h3>Profile Picture</h3> -->
+                    {% if user.profile.profile_picture %}
+                        <div  class="profile-picture">
+                            <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture">
+                        </div>
+                    {% else %}
+                        <div class="default-profile"  style="--profile-color: '{{ user|color_for_user | default:'#6c757d'}}'">
+                            {{ user|initials }}
+                            
+                        </div>
+                    {% endif %}
+                        
+                </div>
+            </div>
+
+            <!-- User Information Section -->
+            <div class="profile-right">
+                <div class="profile-details">
+                <div class="member-since">
+                    <h3>Member Since</h3>
+                    <p>{{ user.profile.created_at|date:"F d, Y" }}</p>
+                </div>
+                <div class="info-item">
+                    {% if user.profile.location %}
+                    <h3>Location</h3>
+                        <a href="javascript:void(0)" onclick="openModal('locationModal')">View</a>
+                    {% endif %}
+                </div>
+                <div class="info-item">
+                    {% if user.profile.about %}
+                    <h3>About</h3>
+                    <a href="javascript:void(0)" onclick="openModal('aboutModal')">View</a>
+                    {% endif %}
+                </div>
+                <!-- Edit Profile Link -->
+                {% if user == request.user %}
+                    <a href="{% url 'edit_profile' user.id %}" class="btn">Edit Profile</a>
+                {% endif %}
+                </div>
+            </div>
+           
+        </div>
     </header>
-
+    
     <div class="profile-content">
-        <!-- User Information Section -->
-        <section class="user-info">
-            <div class="info-item">
-                {% if user.profile.location %}
-                <h3>Location</h3>
-                    <a href="javascript:void(0)" onclick="openModal('locationModal')">View</a>
-                {% endif %}
+        
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
             </div>
-
-            <div class="info-item">
-                {% if user.profile.about %}
-                <h3>About</h3>
-                <a href="javascript:void(0)" onclick="openModal('aboutModal')">View</a>
-                {% endif %}
-            </div>
-        </section>
-
+        {% endif %}
         <!-- Courses Section -->
         <section class="user-courses">
             <h2>Your Courses & Progress</h2>

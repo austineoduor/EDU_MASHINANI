@@ -48,6 +48,7 @@ class UserData(models.Model):
     middle_name = models.CharField(max_length=150, blank=True, null=True)
     location = models.CharField(max_length=200, blank=True, null=True)
     about = models.TextField(blank=True, null=True, validators=[validate_about_length])  # Added validator
+    profile_picture = models.ImageField(upload_to="profile_pics/", blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

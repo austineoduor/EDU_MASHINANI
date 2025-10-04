@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Edit Profile {% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'Users/edit_profile.css' %}">
+
+<div class="edit-profile-container">
+    <h1>Edit Profile</h1>
+    {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    <form  method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Middle Name -->
+        <label for="id_middle_name">Middle Name</label>
+        <input type="text" id="id_middle_name" name="middle_name" 
+                required
+               value="{{ user.profile.middle_name|default:'' }}" 
+               placeholder="Enter your middle name">
+
+        <!-- Location -->
+        <label for="id_location">Location</label>
+        <input type="text" id="id_location" name="location" 
+                required
+               value="{{ user.profile.location|default:'' }}" 
+               placeholder="Your city or country">
+
+        <!-- About -->
+        <label for="id_about">About</label>
+        <textarea id="id_about" name="about" required rows="4" placeholder="Tell us about yourself (max 250 words)">
+            {{ user.profile.about|default:'' }}
+        </textarea>
+
+        <!-- Profile Picture -->
+        <label for="id_profile_picture">Profile Picture</label>
+        {% if user.profile.profile_picture %}
+            <div class="profile-picture-container">
+                <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+            </div>
+        {% endif %}
+        <input type="file" id="id_profile_picture" name="profile_picture">
+
+        <button type="submit" class="btn">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

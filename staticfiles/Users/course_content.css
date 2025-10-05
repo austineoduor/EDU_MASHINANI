@@ -1,0 +1,227 @@
+/* === COURSE CONTENT PAGE === */
+
+.course-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 40px;
+    background: linear-gradient(135deg, #f4f4f4, #e0e7ef);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Header Section */
+.course-header {
+    text-align: center;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.course-header h1 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #333;
+    text-transform: capitalize;
+    margin-bottom: 5px;
+}
+
+/* Optional Subheading */
+.course-category {
+    font-size: 1rem;
+    color: #777;
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Learning Materials Page */
+.learning-materials {
+    margin-top: 20px;
+}
+
+.material-list {
+    list-style: none;
+    padding: 0;
+}
+
+.material-item {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+.material-item:hover {
+    transform: translateY(-3px);
+}
+
+.material-item h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.material-content {
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.video-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Responsive iframe (maintain 16:9 aspect ratio) */
+.video-wrapper iframe {
+    width: 100%;
+    height: 400px;
+    border: none;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
+
+/* Center align for return link */
+.return-link {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* --- RESPONSIVE BREAKPOINTS --- */
+
+/* Medium devices (tablets, <= 992px) */
+@media (max-width: 992px) {
+    .course-container {
+        max-width: 90%;
+        padding: 30px;
+    }
+
+    .course-header h1 {
+        font-size: 1.9rem;
+    }
+
+    .course-category {
+        font-size: 0.95rem;
+    }
+
+    .material-item h3 {
+        font-size: 1.2rem;
+    }
+
+    .video-wrapper iframe {
+        height: 320px;
+    }
+
+    .btn {
+        padding: 9px 20px;
+        font-size: 0.95rem;
+    }
+}
+
+/* Small devices (phones, <= 768px) */
+@media (max-width: 768px) {
+    .course-container {
+        max-width: 95%;
+        padding: 25px;
+        margin: 20px auto;
+    }
+
+    .course-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .course-category {
+        font-size: 0.9rem;
+    }
+
+    iframe {
+        height: 250px !important; /* Reduce video height on mobile */
+    }
+
+    .material-item {
+        padding: 15px;
+    }
+
+    .material-item h3 {
+        font-size: 1.1rem;
+    }
+
+    .video-wrapper iframe {
+        height: 250px;
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 1rem;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .return-link {
+        margin-top: 20px;
+    }
+}
+
+/* Extra small devices (<= 480px) */
+@media (max-width: 480px) {
+    .course-container {
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .course-header h1 {
+        font-size: 1.4rem;
+    }
+
+    .course-category {
+        font-size: 0.85rem;
+    }
+
+    iframe {
+        height: 200px !important;
+    }
+
+    .material-item {
+        padding: 12px;
+    }
+
+    .material-item h3 {
+        font-size: 1rem;
+    }
+
+    .video-wrapper iframe {
+        height: 200px;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+}

@@ -35,26 +35,26 @@
             <!-- User Information Section -->
             <div class="profile-right">
                 <div class="profile-details">
-                <div class="member-since">
-                    <h3>Member Since</h3>
-                    <p>{{ user.profile.created_at|date:"F d, Y" }}</p>
-                </div>
-                <div class="info-item">
-                    {% if user.profile.location %}
-                    <h3>Location</h3>
-                        <a href="javascript:void(0)" onclick="openModal('locationModal')">View</a>
+                    <div class="member-since">
+                        <h3>Member Since</h3>
+                        <p>{{ user.profile.created_at|date:"F d, Y" }}</p>
+                    </div>
+                    <div class="info-item">
+                        {% if user.profile.location %}
+                        <h3>Location</h3>
+                            <a href="javascript:void(0)" onclick="openModal('locationModal')">View</a>
+                        {% endif %}
+                    </div>
+                    <div class="info-item">
+                        {% if user.profile.about %}
+                        <h3>About</h3>
+                        <a href="javascript:void(0)" onclick="openModal('aboutModal')">View</a>
+                        {% endif %}
+                    </div>
+                    <!-- Edit Profile Link -->
+                    {% if user == request.user %}
+                        <a href="{% url 'edit_profile' user.id %}" class="btn">Edit Profile</a>
                     {% endif %}
-                </div>
-                <div class="info-item">
-                    {% if user.profile.about %}
-                    <h3>About</h3>
-                    <a href="javascript:void(0)" onclick="openModal('aboutModal')">View</a>
-                    {% endif %}
-                </div>
-                <!-- Edit Profile Link -->
-                {% if user == request.user %}
-                    <a href="{% url 'edit_profile' user.id %}" class="btn">Edit Profile</a>
-                {% endif %}
                 </div>
             </div>
            
@@ -80,11 +80,17 @@
                 {% for course in courses %}
                 <li>
                     <div class="course-item">
-                        <h4>{{ course.course.name }}</h4>
-                        <span class="course-status">
-                            <strong>Stage: {{course.status}}</strong>
-                            Score: {{ course.score|default:"N/A" }}
-                        </span>
+                        <div>
+                            <h4>{{ course.course.name }}</h4>
+                            <span class="course-status">
+                                <strong>Stage: {{course.status}}</strong> |
+                                Score: {{ course.score|default:"N/A" }}
+                            </span>
+                        </div>
+                         <!-- Continue Learning Button -->
+                        <a href="{% url 'course_content' course.course.id %}" class="btn">
+                            📘 Continue Learning
+                        </a>
                     </div>
                 </li>
                 {% endfor %}

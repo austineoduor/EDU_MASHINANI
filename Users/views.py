@@ -174,17 +174,18 @@ def apply_course(request, course_id):
         has_stable_power = request.POST.get('has_stable_power') == 'on'
         has_laptop = request.POST.get('has_laptop') == 'on'
         agrees_to_terms = request.POST.get('agree_to_terms') == 'on'
-
+        portifio = request.POST.get("portifio")
         location = request.POST.get("location")
         about = request.POST.get("about")
 
         if not (has_stable_power and has_laptop and agrees_to_terms):
             messages.error(request, "You must confirm all fields to apply.")
-        elif not location or not about:
+        elif not location and about and portifio:
             messages.error(request, "Provide both location and about details.")
         else:
             # Update profile
             user_profile = request.user.profile
+            user_profile.portifio = portifio
             user_profile.location = location
             user_profile.about = about
             user_profile.save()
@@ -202,7 +203,22 @@ def apply_course(request, course_id):
         "user_course": user_course,
     }
     return render(request, "Users/apply_course.html", context)
+
+@login_required
+def course_content(request, course_id):
+    # Ensure user is enrolled in this course
+    enrolled = UserCourse.objects.filter(user=request.user, course_id=course_id).exists()
+    if not enrolled:
+        return render(request, '403.html', status=403)  # custom “Access Denied” page
     
+    course = get_object_or_404(Course, id=course_id)
+    materials = course.materials.all()  # thanks to related_name='materials'
+    context = {
+        'course': course,
+        'materials': materials,
+    }
+    return render(request, 'Users/course_content.html', context)
+
 def logout_(request):
     logout(request)
     return redirect(settings.LOGOUT_REDIRECT_URL)

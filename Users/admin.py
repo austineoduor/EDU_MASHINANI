@@ -4,7 +4,7 @@ from django.utils.html import format_html
 from django.urls import path
 from django.template.response import TemplateResponse
 
-from .models import User, UserData, Course, UserCourse
+from .models import User, UserData, Course, UserCourse, CourseMaterial
 
 
 # -----------------------------
@@ -105,6 +105,15 @@ class UserDataAdmin(admin.ModelAdmin):
     search_fields = ("user__username", "location")
     ordering = ("-created_at",)
 
+# -----------------------------
+# CourseMaterials Data Admin
+# -----------------------------
+@admin.register(CourseMaterial)
+class CourseMaterialAdmin(admin.ModelAdmin):
+    list_display = ('title', 'course', 'order')
+    search_fields = ('title', 'course__name')
+    list_filter = ('course',)
+    ordering = ('course', 'order')
 
 # -----------------------------
 # Optional: Custom Dashboard

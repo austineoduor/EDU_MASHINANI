@@ -12,7 +12,6 @@ body {
     max-width: 1100px;
     margin: -23px auto;
     padding: 40px;
-    background: #fff;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     animation: fadeIn 0.5s ease-out;
@@ -21,19 +20,27 @@ body {
 
 /* Profile Header */
 .profile-header{
-    text-align: center;
-    margin-bottom: 2rem;
-    padding: 1rem;
 
     display: flex;
-    /* flex-wrap: wrap; */
     align-items: center;
     justify-content: flex-start;
-    margin-bottom: 2rem;
     padding: 1rem;
     border-bottom: 2px solid #eee;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    text-align: center;
+   
 }
-    
+
+.profile-header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #3a3a3a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 1rem 0;
+}
+
 .profile-header-content {
     display: flex;
     flex-wrap: wrap;
@@ -47,47 +54,8 @@ body {
     margin-bottom: 20px;  
 }
 
-
-.profile-header h1 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: #3a3a3a;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 0;
-    margin-bottom: 1rem;
-}
-
-/* Member since */
-.profile-header .member-since {
-    font-size: 0.9em;
-    color: #777;
-    margin-bottom: 5px;
-    
-}
-
-
-/* Profile Details */
-.profile-right {
-    flex-grow: 1; /* Make details take up remaining space */
-}
-
-.profile-details {
-    margin-bottom: 20px;
-}
-
-.profile-details a {
-    color: #e0e4e9;
-    text-decoration: none;
-}
-
-.profile-details .member-since,
-.profile-details .info-item {
-    border-bottom: 2px solid #eee;
-}
-
 /* Profile picture */
-.profile-header .profile-picture-container {
+.profile-picture-container {
     width: 120px;          /* size of circle */
     height: 120px;
     border-radius: 50%;    /* makes it a circle */
@@ -99,9 +67,15 @@ body {
     border: 3px solid #ddd; /* optional: nice border */
 }
 
+.profile-picture img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
 
 /* Default fallback picture */
-.profile-header .default-profile {
+.default-profile {
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -119,6 +93,35 @@ body {
 
 
 
+
+/* === Profile Right Section === */
+.profile-right {
+    flex-grow: 1; /* Make details take up remaining space */
+}
+
+.profile-details {
+    margin-bottom: 20px;
+}
+
+/* Member since */
+.profile-header .member-since {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 5px;
+    
+}
+
+.profile-details a {
+    color: #e0e4e9;
+    text-decoration: none;
+}
+
+.profile-details .member-since,
+.profile-details .info-item {
+    border-bottom: 2px solid #eee;
+}
+
+
 .profile-header .profile-picture{
     width: 100%;
     height: 100%;
@@ -127,12 +130,7 @@ body {
     margin-bottom: 15px;
     border: 3px solid #ddd;
 }
-.profile-picture img{
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-}
+
 .profile-right .btn {
 
     display: inline-block;
@@ -153,8 +151,15 @@ body {
 }
 
 .info-item {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    position: relative;
     background: #fff;
     padding: 10px;
+    width: 60%;
+    left: 26vw;
     border-radius: 46px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
@@ -230,7 +235,13 @@ body {
     font-weight: 500;
 }
 
-
+.course-item .btn{
+    background-color: #777;
+}
+.course-item .btn:hover{
+    background-color: #7a779e;
+    text-decoration: none;
+}
 
 /* models */
 .modal {
@@ -274,34 +285,120 @@ body {
 }
 
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
+/* --------------------- Responsive Layout --------------------- */
+
+/* Medium devices (≤ 992px) */
+@media (max-width: 992px) {
     .profile-container {
-        padding: 20px;
+        max-width: 99%;
+        margin-top: 10px;
+        padding: 30px;
     }
 
-    .user-info {
-        grid-template-columns: 1fr;
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
     .profile-header h1 {
         font-size: 2rem;
     }
 
-    .info-item h3 {
-        font-size: 1.1rem;
+    .profile-header-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
     }
 
-    .modal-content{
-        left: 28vh;
+    .profile-left {
+        margin: 0 0 15px 0;
     }
 
-    .info-item p {
-        font-size: 0.9rem;
+    .profile-picture-container {
+        width: 100px;
+        height: 100px;
+    }
+
+    .default-profile {
+        width: 100px;
+        height: 100px;
+        font-size: 1.5rem;
+    }
+
+    .profile-right .btn {
+        width: 100%;
+        border-radius: 10px;
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    .info-item {
+        text-align: center;
+        border-radius: 20px;
+    }
+
+    .user-courses h2 {
+        font-size: 1.4rem;
+    }
+
+    .course-item {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        gap: 10px;
+    }
+
+    .course-item .btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
     }
 }
 
-/* --------------------- Responsive Layout --------------------- */
+/* Small devices (≤ 768px)
+@media (max-width: 768px) {
+    body {
+        background-color: #f5f7fb;
+    }
+
+    .profile-container {
+        padding: 25px;
+        max-width: 95%;
+    }
+
+    .profile-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .profile-picture-container,
+    .default-profile {
+        width: 90px;
+        height: 90px;
+    }
+
+    .info-item {
+        padding: 10px 15px;
+        font-size: 0.95rem;
+    }
+
+    .course-item h4 {
+        font-size: 1.1rem;
+    }
+
+    .modal-content {
+        width: 80%;
+        max-width: 350px;
+        left: auto;
+        transform: none;
+        margin: 30% auto;
+        height: auto;
+    }
+
+    .modal-content p {
+        font-size: 0.95rem;
+    }
+} */
 
 /* For screens smaller than 768px (tablets) */
 @media (max-width: 768px) {
@@ -326,30 +423,63 @@ body {
 
     .btn {
         width: 100%;  /* Full-width button on small screens */
+        height: 52;
+
     }
 }
 
 /* For screens smaller than 480px (phones) */
-@media (max-width: 400px) {
-    .profile-header {
-        padding: 10px;
+/* Extra small devices (≤ 480px) */
+@media (max-width: 480px) {
+    .profile-container {
+        padding: 20px;
+        border-radius: 10px;
     }
 
-    .profile-picture-container {
-        width: 100px; /* Smaller profile picture */
-        height: 100px;
+    .profile-header h1 {
+        font-size: 1.4rem;
     }
 
-    .profile-picture img {
-        object-fit: contain; /* Maintain aspect ratio */
+    .profile-picture-container,
+    .default-profile {
+        width: 75px;
+        height: 75px;
+        font-size: 1.1rem;
     }
 
     .profile-details {
-        font-size: 14px; /* Adjust text size for small screens */
+        font-size: 0.9rem;
+    }
+
+    .info-item h3 {
+        font-size: 1rem;
     }
 
     .btn {
-        padding: 12px; /* Slightly bigger button */
+        padding: 10px;
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+
+    .user-courses h2 {
+        font-size: 1.2rem;
+    }
+
+    .course-item {
+        padding: 12px;
+    }
+
+    .modal-content {
+        width: 90%;
+        margin: 40% auto;
+        padding: 15px;
+        border-radius: 10px;
+        max-height: 300px;
+    }
+
+    .about-box {
+        max-height: 150px;
+        font-size: 0.85rem;
     }
 }
 /* Keyframe Animation */

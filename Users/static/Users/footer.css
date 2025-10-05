@@ -134,10 +134,11 @@ footer.fot_container {
 
 /* Responsive */
 @media screen and (max-width: 768px) {
-    .fot_div {
+    /* .fot_div {
         flex-direction: column;
+        
         text-align: center;
-    }
+    } */
 
     .fot_social,
     .fot_cont_info {

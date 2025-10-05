@@ -34,6 +34,13 @@
                value="{{ user.profile.location|default:'' }}" 
                placeholder="Your city or country">
 
+        <!-- Portifio -->
+        <label for="id_portifio">Portifio-Link/Blog-Page</label>
+        <input type="text" id="id_portifio" name="portifio" 
+                required
+               value="{{ user.profile.portifio|default:'' }}" 
+               placeholder="Your portifio link">
+
         <!-- About -->
         <label for="id_about">About</label>
         <textarea id="id_about" name="about" required rows="4" placeholder="Tell us about yourself (max 250 words)">

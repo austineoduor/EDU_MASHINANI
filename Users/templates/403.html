@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Access Denied{% endblock %}
+{% block content %}
+<div style="text-align:center; padding:50px;">
+    <h2>🚫 Access Denied</h2>
+    <p>You do not have permission to view this course.</p>
+    <a href="{% url 'profile' %}" class="btn">← Back to Profile</a>
+</div>
+{% endblock %}

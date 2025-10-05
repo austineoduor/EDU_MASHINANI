@@ -49,6 +49,7 @@ class UserData(models.Model):
     location = models.CharField(max_length=200, blank=True, null=True)
     about = models.TextField(blank=True, null=True, validators=[validate_about_length])  # Added validator
     profile_picture = models.ImageField(upload_to="profile_pics/", blank=True, null=True)
+    portfolio_link = models.URLField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -100,6 +101,22 @@ class Course(models.Model):
     def get_applications(self):
         return self._parse_text_field(self.applications)
 
+
+class CourseMaterial(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='materials')
+    title = models.CharField(max_length=200)
+    content = models.TextField(blank=True, null=True)
+    file = models.FileField(upload_to='course_materials/', blank=True, null=True)
+    video_url = models.URLField(blank=True, null=True)
+    order = models.PositiveIntegerField(default=0, help_text="Order of material in course (lower first)")
+
+    class Meta:
+        ordering = ('order', 'id')
+        verbose_name = "Course Material"
+        verbose_name_plural = "Course Materials"
+        
+    def __str__(self):
+        return f"{self.title} ({self.course.name})"
 
 class UserCourse(models.Model):
     """Mapping of users to courses with status & progress tracking."""

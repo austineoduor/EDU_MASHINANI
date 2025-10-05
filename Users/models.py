@@ -167,6 +167,6 @@ def ensure_user_profile(sender, instance, created, **kwargs):
     This is helpful so templates can safely access `user.profile` after user
     creation; alternatively use `user.get_profile()` where appropriate.
     """
-    if created:
+    if created and not hasattr(instance, 'profile'):
         UserData.objects.get_or_create(user=instance)
         

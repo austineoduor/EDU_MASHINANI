@@ -15,6 +15,7 @@ class UserDataInline(admin.StackedInline):
     can_delete = False
     verbose_name_plural = "Profile"
     fk_name = "user"
+    max_num = 1
 
 
 # -----------------------------

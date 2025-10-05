@@ -63,7 +63,7 @@ def register_(request):
                 password = pwd1
                 )
         # Create linked UserData
-        UserData.objects.create(
+        UserData.objects.get_or_create(
             user=member,
             middle_name=middle_name
         )

@@ -43,25 +43,25 @@ def register_(request):
             messages.error(request, "First name, last name, and email are required", extra_tags='register')
             # return render(request, "index.html", {"show_register": True})
 
-        elif pwd1 != pwd2:
+        if pwd1 != pwd2:
             messages.error(request, "Passwords do not match", extra_tags='register')
             # return render(request, "index.html",  {"show_register": True})
         
 
         # Create Django User (use email as username for uniqueness)
-        elif User.objects.filter(username=email).exists():
+        if User.objects.filter(username=email).exists():
             messages.error(request, "Email already registered", extra_tags='register')
             # return render(request, "index.html",  {"show_register": True})
         
         # Save in custom UserData with bcrypt hash
-        else:
-            member = User.objects.create_user(
-                username=email,
-                first_name = first_name,
-                last_name = last_name,
-                email = email,
-                password = pwd1
-                )
+        
+        member = User.objects.create_user(
+            username=email,
+            first_name = first_name,
+            last_name = last_name,
+            email = email,
+            password = pwd1
+            )
         # Create linked UserData
         UserData.objects.get_or_create(
             user=member,

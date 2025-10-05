@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
+from django.db import IntegrityError
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
@@ -30,6 +31,10 @@ def login_(request):
     return render(request, 'index.html', {"show_register": False})
 
 def register_(request):
+
+    # Create Django User (use email as username for uniqueness)
+    
+    
     if request.method == "POST":
 
         first_name = request.POST.get("first_name")
@@ -39,36 +44,39 @@ def register_(request):
         pwd1 = request.POST.get("password1")
         pwd2 = request.POST.get("password2")
 
+        if User.objects.filter(username=email).exists():
+            messages.error(request, "Email already registered", extra_tags='register')
+            return render(request, "index.html",  {"show_register": True})
+        
         if not first_name or not last_name or not email:
             messages.error(request, "First name, last name, and email are required", extra_tags='register')
-            # return render(request, "index.html", {"show_register": True})
+            return render(request, "index.html", {"show_register": True})
 
         if pwd1 != pwd2:
             messages.error(request, "Passwords do not match", extra_tags='register')
-            # return render(request, "index.html",  {"show_register": True})
+            return render(request, "index.html",  {"show_register": True})
         
-
-        # Create Django User (use email as username for uniqueness)
-        if User.objects.filter(username=email).exists():
-            messages.error(request, "Email already registered", extra_tags='register')
-            # return render(request, "index.html",  {"show_register": True})
         
         # Save in custom UserData with bcrypt hash
-        
-        member = User.objects.create_user(
-            username=email,
-            first_name = first_name,
-            last_name = last_name,
-            email = email,
-            password = pwd1
+        try:
+        # Create Django User
+            member = User.objects.create_user(
+                username=email,
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                password=pwd1
             )
+        except IntegrityError:
+            messages.error(request, "A user with this email already exists.", extra_tags='register')
+            return render(request, "index.html", {"show_register": True})
         # Create linked UserData
-        UserData.objects.get_or_create(
+        userdata = UserData.objects.get_or_create(
             user=member,
-            middle_name=middle_name
+            defaults={"middle_name":middle_name}
         )
         
-        messages.success(request, "Account created successfully. Please log in.", extra_tags='register')
+        messages.success(request, "Account created successfully{userdata.username}Please log in.", extra_tags='register')
         return redirect("login_")
     
     return render(request, 'index.html', {"show_register": True})
